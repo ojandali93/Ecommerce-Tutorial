@@ -2,6 +2,10 @@ import data from './data.js';
 
 const itemsContainer = document.querySelector('#items')
 
+const itemList = document.getElementById('item-list')
+const itemQuantity = document.getElementById('cart-qty')
+const itemTotal = document.getElementById('cart-total')
+
 for (let i = 0; i < data.length; i++) {
 	// create a new div element and give it a class name
 	const newDiv = document.createElement('div');
@@ -11,6 +15,7 @@ for (let i = 0; i < data.length; i++) {
     const des = document.createElement('p');
     const price = document.createElement('p');
     const button = document.createElement('button')
+
 	// this will change each time we go through the loop. Can you explain why?
 	img.src = data[i].image
 	img.width = 300
@@ -61,7 +66,6 @@ function totalAmount(){
 
     for(let i=0; i < cart.length; i++){
         total += cart[i].price * cart[i].quantity
-        console.log(`Total in cart $${total.toFixed(2)}`)
     }
     return total.toFixed(2)
 }
@@ -71,11 +75,17 @@ function showItems() {
     const quantity = totalQuantity()
     const total = totalAmount()
 
-    console.log(`You have ${quantity} items in your cart!`)
+    itemQuantity.innerHTML = `You have ${quantity} items in your cart!`
+    itemTotal.innerHTML = `Your cart total is: ${total}`
 
+    let itemString = ''
     for(let i=0; i < cart.length; i++){
-        
+        const name = cart[i].name
+        const price = cart[i].price
+        const quantity = cart[i].quantity
+        itemString += `<li> ${name} | $${price} X ${quantity} = ${price * quantity}</li>` 
     }
+    itemList.innerHTML = itemString
 }
 
 function removeItem(name){
