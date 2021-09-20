@@ -6,6 +6,10 @@ const itemList = document.getElementById('item-list')
 const itemQuantity = document.getElementById('cart-qty')
 const itemTotal = document.getElementById('cart-total')
 
+// const all_items_button = document.querySelectorAll("button")
+// const all_items_button = Array.from(document.querySelectorAll("button"))
+// console.log(all_items_button)
+
 for (let i = 0; i < data.length; i++) {
 	// create a new div element and give it a class name
 	const newDiv = document.createElement('div');
@@ -30,9 +34,15 @@ for (let i = 0; i < data.length; i++) {
     newDiv.appendChild(des)
     newDiv.appendChild(price)
     newDiv.appendChild(button)
-	console.log(img) // Check the console!
+
 	itemsContainer.appendChild(newDiv)
 }
+
+const all_items_button = Array.from(document.querySelectorAll("button"))
+all_items_button.forEach(elt => elt.addEventListener('click', () => {
+    addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
+    showItems()
+  }))
 
 const cart = []
 
@@ -101,9 +111,9 @@ function removeItem(name){
     }
 }
 
-addItem('happy', 1.00)
-addItem('Sad', 3.99)
-addItem('Sad', 3.99)
-showItems()
-removeItem('Sad')
-showItems()
+// addItem('happy', 1.00)
+// addItem('Sad', 3.99)
+// addItem('Sad', 3.99)
+// showItems()
+// removeItem('Sad')
+// showItems()
