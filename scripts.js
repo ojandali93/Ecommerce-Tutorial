@@ -38,19 +38,30 @@ for (let i = 0; i < data.length; i++) {
 	itemsContainer.appendChild(newDiv)
 }
 
-const all_items_button = Array.from(document.querySelectorAll("button"))
-all_items_button.forEach(elt => elt.addEventListener('click', () => {
-    addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
-    showItems()
-  }))
-
 const cart = []
 
+itemList.onclick = function(e) {
+    if (e.target && e.target.classList.contains('remove')){
+        const name = e.target.dataset.name
+        removeItem(name)
+    } else if(e.target && e.target.classList.contains('decrease')){
+        const name = e.target.dataset.name
+        decreaseQuantity(name)
+    } else if(e.target && e.target.classList.contains('increase')){
+        const name = e.target.dataset.name
+        const price = e.target.dataset.price
+        addItem(name, price)
+    }
+}
+
 function addItem(name, price) {
+    console.log('increased item')
+    console
 
     for(let i = 0; i < cart.length; i++){
         if(cart[i].name === name){
             cart[i].quantity +=1
+            showItems()
             return;
         }
     }
@@ -93,7 +104,11 @@ function showItems() {
         const name = cart[i].name
         const price = cart[i].price
         const quantity = cart[i].quantity
-        itemString += `<li> ${name} | $${price} X ${quantity} = ${price * quantity}</li>` 
+        itemString += `<li> ${name} | $${price} X ${quantity} = ${price * quantity}
+        <button class="remove" data-name="${name}">Remove</button>
+        <button class="increase" data-name="${name}">+</button>
+        <button class="decrease" data-name="${name}">-</button>
+        </li>` 
     }
     itemList.innerHTML = itemString
 }
@@ -101,15 +116,34 @@ function showItems() {
 function removeItem(name){
     for (let i=0; i < cart.length; i++){
         if(cart[i].name === name){
+            cart.splice(i, 1)
+        }
+    }
+    showItems()
+}
+
+function decreaseQuantity(name){
+    console.log('decreased item')
+
+    for (let i=0; i < cart.length; i++){
+        if(cart[i].name === name){
             if(cart[i].quantity > 1){
                 cart[i].quantity -= 1
+                showItems()
                 return;
             } else {
                 cart.splice(i, 1)
+                showItems()
             }
         }
     }
 }
+
+const all_items_button = Array.from(document.querySelectorAll("button"))
+all_items_button.forEach(elt => elt.addEventListener('click', () => {
+    addItem(elt.getAttribute('id'), elt.getAttribute('data-price'))
+    showItems()
+  }))
 
 // addItem('happy', 1.00)
 // addItem('Sad', 3.99)

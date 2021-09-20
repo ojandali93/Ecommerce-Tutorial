@@ -56,3 +56,19 @@ body {
     padding: 8px;
     border-radius: 10px;
 }
+
+.cart {
+    margin-top: 20px;
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-bottom: 30px;
+    background-color: bisque;
+}
+
+#cart-qty {
+    font-weight: bold;
+}
+
+#cart-total {
+    font-weight: bold;
+}
