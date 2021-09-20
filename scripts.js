@@ -71,14 +71,29 @@ function showItems() {
     const quantity = totalQuantity()
     const total = totalAmount()
 
-    console.log(`You have ${cart.length} items in your cart!`)
+    console.log(`You have ${quantity} items in your cart!`)
 
     for(let i=0; i < cart.length; i++){
         
     }
 }
 
+function removeItem(name){
+    for (let i=0; i < cart.length; i++){
+        if(cart[i].name === name){
+            if(cart[i].quantity > 1){
+                cart[i].quantity -= 1
+                return;
+            } else {
+                cart.splice(i, 1)
+            }
+        }
+    }
+}
+
 addItem('happy', 1.00)
 addItem('Sad', 3.99)
 addItem('Sad', 3.99)
+showItems()
+removeItem('Sad')
 showItems()
