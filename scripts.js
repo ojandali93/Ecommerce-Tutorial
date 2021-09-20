@@ -28,3 +28,18 @@ for (let i = 0; i < data.length; i++) {
 	console.log(img) // Check the console!
 	itemsContainer.appendChild(newDiv)
 }
+
+const cart = []
+
+function addItem(name, price) {
+    const item = {name:name, price:price, quantity:1}
+    console.log(item)
+    cart.push(item)
+}
+
+function showItems() {
+    console.log(`You have ${cart.length} items in your cart!`)
+}
+
+addItem('happy', 1.00)
+showItems()
