@@ -32,14 +32,53 @@ for (let i = 0; i < data.length; i++) {
 const cart = []
 
 function addItem(name, price) {
+
+    for(let i = 0; i < cart.length; i++){
+        if(cart[i].name === name){
+            cart[i].quantity +=1
+            return;
+        }
+    }
+
     const item = {name:name, price:price, quantity:1}
-    console.log(item)
+
     cart.push(item)
 }
 
+function totalQuantity(){
+
+    let quantity = 0
+
+    for(let i=0; i < cart.length; i++){
+        quantity += cart[i].quantity
+    }
+    return quantity
+}
+
+function totalAmount(){
+
+    let total = 0
+
+    for(let i=0; i < cart.length; i++){
+        total += cart[i].price * cart[i].quantity
+        console.log(`Total in cart $${total.toFixed(2)}`)
+    }
+    return total.toFixed(2)
+}
+
 function showItems() {
+
+    const quantity = totalQuantity()
+    const total = totalAmount()
+
     console.log(`You have ${cart.length} items in your cart!`)
+
+    for(let i=0; i < cart.length; i++){
+        
+    }
 }
 
 addItem('happy', 1.00)
+addItem('Sad', 3.99)
+addItem('Sad', 3.99)
 showItems()
